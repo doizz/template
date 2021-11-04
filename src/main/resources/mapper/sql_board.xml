@@ -14,4 +14,21 @@
                 deleted_yn = 'N'
             ORDER BY board_idx DESC
     </select>
+
+    <insert id="insertBoard" parameterType="com.function.template.dto.BoardDto">
+            INSERT INTO t_board
+            (
+                title,
+                contents,
+                created_datetime,
+                creator_id
+            )
+            VALUE
+            (
+                #{title},
+                #{contents},
+                NOW(),
+                'admin'
+            )
+    </insert>
 </mapper>
