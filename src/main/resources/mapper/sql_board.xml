@@ -31,4 +31,22 @@
                 'admin'
             )
     </insert>
+    <update id="updateHitCount" parameterType="int">
+        UPDATE
+            t_board
+        SET
+            hit_cnt = hit_cnt + 1
+        WHERE
+            board_idx = #{boardIdx}
+	</update>
+    <select id="selectBoardDetail" parameterType="int" resultType="com.function.template.dto.BoardDto">
+        SELECT
+            board_idx, title, contents, hit_cnt,
+            created_datetime,
+            creator_id
+        FROM
+            t_board
+        WHERE
+            board_idx = ${boardIdx} AND deleted_yn = 'N'
+	</select>
 </mapper>
