@@ -49,7 +49,7 @@
         WHERE
             board_idx = ${boardIdx} AND deleted_yn = 'N'
 	</select>
-    <update id="updateBoard" parameterType="board.board.dto.BoardDto">
+    <update id="updateBoard" parameterType="com.function.template.dto.BoardDto">
             t_board
         SET
             title = #{title},
