@@ -13,10 +13,14 @@ import org.springframework.context.annotation.PropertySource;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @Configuration
 @PropertySource("classpath:/application.properties")
+@EnableTransactionManagement
 public class DatabaseConfiguration {
 
 
@@ -55,4 +59,10 @@ public class DatabaseConfiguration {
     public org.apache.ibatis.session.Configuration mybatisConfig() {
         return new org.apache.ibatis.session.Configuration();
     }
+
+    @Bean
+    public PlatformTransactionManager transactionManager() throws Exception {
+        return new DataSourceTransactionManager(dataSource());
+    }
+
 }
