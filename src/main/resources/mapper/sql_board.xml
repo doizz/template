@@ -15,7 +15,7 @@
             ORDER BY board_idx DESC
     </select>
 
-    <insert id="insertBoard" parameterType="com.function.template.dto.BoardDto">
+    <insert id="insertBoard" parameterType="board.board.dto.BoardDto" useGeneratedKeys="true" keyProperty="boardIdx">
             INSERT INTO t_board
             (
                 title,
@@ -71,4 +71,28 @@
             board_idx = #{boardIdx}
     </update>
 
+    <insert id="insertBoardFileList" parameterType="com.function.template.dto.BoardFileDto">
+        <![CDATA[
+			INSERT INTO t_file
+			(
+				board_idx,
+				original_file_name,
+				stored_file_path,
+				file_size,
+				creator_id,
+				created_datetime
+			)
+			VALUES
+		]]>
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.boardIdx},
+            #{item.originalFileName},
+            #{item.storedFilePath},
+            #{item.fileSize},
+            'admin',
+            NOW()
+            )
+        </foreach>
+    </insert>
 </mapper>
