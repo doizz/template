@@ -1,16 +1,27 @@
 package com.function.template.controller;
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 import com.function.template.dto.BoardDto;
+import com.function.template.dto.BoardFileDto;
 import com.function.template.service.BoardService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 // ADD START
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletResponse;
+
 // ADD END
 @Controller
 public class BoardController {
@@ -64,5 +75,23 @@ public class BoardController {
     public String deleteBoard(int boardIdx) throws Exception {
         boardService.deleteBoard(boardIdx);
         return "redirect:/board/openBoardList.do";
+    }
+
+    @RequestMapping("board/downloadBoardFile.do")
+    public void downloadBoardFile(@RequestParam int idx, @RequestParam int boardIdx, HttpServletResponse response) throws Exception {
+        BoardFileDto boardFile = boardService.selectBoardFileInformation(idx, boardIdx);
+        if(ObjectUtils.isEmpty(boardFile) == false) {
+            String fileName = boardFile.getOriginalFileName();
+
+            byte[] files = FileUtils.readFileToByteArray(new File(boardFile.getStoredFilePath()));
+
+            response.setContentType("application/octet-stream");
+            response.setContentLength(files.length);
+            response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileName, "UTF-8")+"\";");
+
+            response.getOutputStream().write(files);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+        }
     }
 }

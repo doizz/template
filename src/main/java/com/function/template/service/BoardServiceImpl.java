@@ -65,9 +65,11 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDto selectBoardDetail(int boardIdx) throws Exception {
-        boardMapper.updateHitCount(boardIdx);
-        int i = 10 / 0; // ADD
         BoardDto board = boardMapper.selectBoardDetail(boardIdx);
+        List<BoardFileDto> fileList = boardMapper.selectBoardFileList(boardIdx);
+        board.setFileList(fileList);
+
+        boardMapper.updateHitCount(boardIdx);
 
         return board;
     }
@@ -81,5 +83,8 @@ public class BoardServiceImpl implements BoardService {
     public void deleteBoard(int boardIdx) throws Exception {
         boardMapper.deleteBoard(boardIdx);
     }
-
+    @Override
+    public BoardFileDto selectBoardFileInformation(int idx, int boardIdx) throws Exception {
+        return boardMapper.selectBoardFileInformation(idx, boardIdx);
+    }
 }
