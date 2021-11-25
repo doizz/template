@@ -14,4 +14,5 @@ public interface BoardService {
 
     void deleteBoard(int boardIdx) throws Exception;
     BoardFileDto selectBoardFileInformation(int idx, int boardIdx) throws Exception;
+    void deleteBoardFile(int idx, int boardIdx) throws Exception;
 }

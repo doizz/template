@@ -94,4 +94,11 @@ public class BoardController {
             response.getOutputStream().close();
         }
     }
+
+    @RequestMapping("board/deleteBoardFile.do")
+    public String deleteBoardFile(@RequestParam int idx, @RequestParam int boardIdx) throws Exception {
+        boardService.deleteBoardFile(idx, boardIdx);
+
+        return "redirect:/board/openBoardDetail.do?boardIdx="+boardIdx;
+    }
 }
