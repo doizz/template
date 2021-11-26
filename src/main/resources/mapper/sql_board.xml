@@ -125,17 +125,5 @@
           AND deleted_yn = 'N'
         ]]>
 	</select>
-    <update id="deleteBoardFile" parameterType="map">
-		<![CDATA[
-        UPDATE
-            t_file
-        SET
-            deleted_yn = 'Y',
-            updated_datetime = NOW(),
-            updater_id = 'admin'
-        WHERE
-            idx = #{idx}
-          AND board_idx = #{boardIdx}
-        ]]>
-	</update>
+
 </mapper>
