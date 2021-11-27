@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <h2>게시글 상세 화면</h2>
-    <form id="frm" method="post">
+    <form id="frm" method="post" enctype="multipart/form-data">>
         <table class="board_detail">
             <colgroup>
                 <col width="15%"/>
@@ -46,6 +46,7 @@
             </tbody>
         </table>
         <input type="hidden" name="boardIdx" th:value="${board.boardIdx}">
+        <input type="file" id="files" name="files" multiple="multiple">
     </form>
 
     <!-- modify start -->
