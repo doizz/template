@@ -65,8 +65,8 @@ public class BoardController {
     }
 
     @RequestMapping("board/updateBoard.do")
-    public String updateBoard(BoardDto board) throws Exception {
-        boardService.updateBoard(board);
+    public String updateBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+        boardService.updateBoard(board, multipartHttpServletRequest);
         return "redirect:/board/openBoardList.do";
     }
 
