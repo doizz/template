@@ -75,8 +75,13 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void updateBoard(BoardDto board) throws Exception {
+    public void updateBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
         boardMapper.updateBoard(board);
+
+        List<BoardFileDto> list = fileUtils.parseFileInfo(board.getBoardIdx(), multipartHttpServletRequest);
+        if(CollectionUtils.isEmpty(list) == false) {
+            boardMapper.insertBoardFileList(list);
+        }
     }
 
     @Override
