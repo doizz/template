@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import board.board.dto.BoardDto;
-import board.board.dto.BoardFileDto;
-import board.board.service.BoardService;
+import com.function.template.dto.BoardDto;
+import com.function.template.dto.BoardFileDto;
+import com.function.template.service.BoardService;
 
 @Controller
 public class RestBoardController {
