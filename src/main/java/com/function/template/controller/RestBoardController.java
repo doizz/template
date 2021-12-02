@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.function.template.dto.BoardDto;
+import com.function.template.dto.BoardDto;ㅈ
 import com.function.template.dto.BoardFileDto;
 import com.function.template.service.BoardService;
 
