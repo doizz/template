@@ -51,8 +51,10 @@
 
     <!-- modify start -->
     <div class="file_list" th:each="list : ${board.fileList}">
-        <a style="float:left" th:href="@{/board/downloadBoardFile.do(idx=${list.idx}, boardIdx=${list.boardIdx})}" th:text="|${list.originalFileName}(${list.fileSize} kb)|"></a>
-        <input type="button" id="delete_file" th:value="파일삭제" th:onclick="|location.href='@{/board/deleteBoardFile.do(idx=${list.idx}, boardIdx=${list.boardIdx})}'|">
+        <a style="float:left" th:href="@{/board/file(idx=${list.idx}, boardIdx=${list.boardIdx})}" th:text="|${list.originalFileName}(${list.fileSize} kb)|"></a>
+        <form th:method="delete" th:action="@{/board/file(idx=${list.idx}, boardIdx=${list.boardIdx})}">
+            <input type="submit" id="delete_file" th:value="파일삭제">
+        </form>
     </div>
     <!-- modify end -->
 
@@ -64,18 +66,22 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $("#list").on("click", function(){
-                location.href = "openBoardList.do";
+                location.href = "/board/";
             });
 
             $("#edit").on("click", function(){
+                $("input:hidden[name=_method]").val("put");
+
                 var frm = $("#frm")[0];
-                frm.action = "updateBoard.do";
+                frm.action = "/board"+$("input:hidden[name=boardIdx]").val();
                 frm.submit();
             });
 
             $("#delete").on("click", function(){
+                $("input:hidden[name=_method]").val("delete");
+
                 var frm = $("#frm")[0];
-                frm.action = "deleteBoard.do";
+                frm.action = "/board/"+$("input:hidden[name=boardIdx]").val();
                 frm.submit();
             });
         })
