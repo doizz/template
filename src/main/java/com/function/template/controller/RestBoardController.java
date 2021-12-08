@@ -59,7 +59,11 @@ public class RestBoardController {
         return mv;
     }
 
-
+    @RequestMapping(value="/board/{boardIdx}", method=RequestMethod.PUT)
+    public String updateBoard(BoardDto board) throws Exception {
+        boardService.updateBoard(board);
+        return "redirect:/board";
+    }
 
     @RequestMapping(value="/board/{boardIdx}", method=RequestMethod.DELETE)
     public String deleteBoard(@PathVariable("boardIdx") int boardIdx) throws Exception {
