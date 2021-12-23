@@ -11,11 +11,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 
+
 public interface JpaBoardRepository extends CrudRepository<BoardEntity, Integer> {
 
 	List<BoardEntity> findAllByOrderByBoardIdxDesc();
 
-	@Query("SELECT file FROM BoardFileEntity file WHERE board_idx = :boardIdx AND idx = :idx")
+	@Query("SELECT file FROM BoardFileEntity file WHERE file.creatorId = :boardIdx AND file.idx = :idx")
 	BoardFileEntity findBoardFile(@Param("idx") int idx, @Param("boardIdx") int boardIdx);
 
 	@Transactional

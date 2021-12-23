@@ -8,6 +8,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.function.template.entity.BoardEntity;
+import com.function.template.entity.BoardFileEntity;
+import com.function.template.service.JpaBoardService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
