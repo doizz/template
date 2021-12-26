@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class JpaBoardServiceImpl implements JpaBoardService {
 
     @Autowired
-    com.function.template.repository.JpaBoardRepository JpaBoardRepository;
+    JpaBoardRepository JpaBoardRepository;
 
     @Autowired
     FileUtils fileUtils;
